@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Self-host the two typefaces via Google Fonts CDN — fine on a static site,
+   but kept in the head for preconnect. */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink-900 font-serif antialiased;
+    font-feature-settings: 'kern', 'liga', 'onum';
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-ink-900;
+    font-feature-settings: 'kern', 'liga', 'lnum';
+    letter-spacing: -0.01em;
+  }
+  /* Subtle horizontal rule under each section heading — mirrors the CV. */
+  .rule-heading {
+    @apply relative pb-3 border-b border-ink-800/30;
+  }
+}
+
+@layer components {
+  .container-readable {
+    @apply mx-auto max-w-5xl px-6 sm:px-8;
+  }
+  .label-eyebrow {
+    @apply font-sans uppercase tracking-[0.18em] text-xs text-ink-700;
+  }
+  .link-underline {
+    @apply text-ink-800 underline decoration-ink-300 underline-offset-4 transition-colors hover:decoration-ink-800;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-ink-800 px-5 py-2.5 font-sans text-sm font-medium tracking-wide text-paper transition-colors hover:bg-ink-900;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 border border-ink-800 px-5 py-2.5 font-sans text-sm font-medium tracking-wide text-ink-800 transition-colors hover:bg-ink-800 hover:text-paper;
+  }
+}

@@ -1,0 +1,31 @@
+---
+import { profile } from '../data/cv';
+import SocialLinks from './SocialLinks.astro';
+---
+
+<header class="border-b border-ink-200 bg-paper/90 sticky top-0 z-30 backdrop-blur">
+  <div class="container-readable flex items-center justify-between py-4">
+    <a href="#top" class="font-serif text-lg font-semibold tracking-tight text-ink-900">
+      David&nbsp;N.&nbsp;Primer
+    </a>
+    <nav class="hidden md:flex items-center gap-8 font-sans text-sm text-ink-700">
+      <a href="#about" class="hover:text-ink-900 transition-colors">About</a>
+      <a href="#experience" class="hover:text-ink-900 transition-colors">Experience</a>
+      <a href="#publications" class="hover:text-ink-900 transition-colors">Publications</a>
+      <a href="#contact" class="hover:text-ink-900 transition-colors">Contact</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <SocialLinks
+        wrapClass="hidden lg:flex items-center gap-4"
+        size={18}
+      />
+      <a
+        href={profile.cvUrl}
+        class="hidden sm:inline-flex items-center gap-2 border border-ink-800 px-3.5 py-1.5 font-sans text-xs font-medium uppercase tracking-wider text-ink-800 transition-colors hover:bg-ink-800 hover:text-paper"
+        download
+      >
+        Download CV
+      </a>
+    </div>
+  </div>
+</header>

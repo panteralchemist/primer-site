@@ -1,0 +1,84 @@
+---
+// Netlify Forms: form has data-netlify="true" and a hidden input named form-name.
+// Vercel users: replace this with the @vercel/edge-config or a serverless function;
+// see README.md.
+---
+
+<section id="contact" class="border-b border-ink-200">
+  <div class="container-readable py-20 md:py-24">
+    <div class="grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-5">
+        <p class="label-eyebrow mb-4">Contact</p>
+        <h2 class="text-3xl md:text-4xl font-semibold rule-heading">
+          Get in touch.
+        </h2>
+        <p class="mt-6 max-w-md text-ink-700 leading-relaxed">
+          For collaboration, speaking, or recruiting inquiries, send a note here.
+          I respond personally to every message; no auto-replies.
+        </p>
+        <p class="mt-4 max-w-md text-sm text-ink-500 leading-relaxed">
+          Submissions are routed by Netlify Forms — no email address is exposed
+          on this page.
+        </p>
+      </div>
+
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="md:col-span-7 space-y-5"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <label class="block">
+            <span class="label-eyebrow">Name</span>
+            <input
+              type="text"
+              name="name"
+              required
+              class="mt-2 w-full border-b border-ink-300 bg-transparent py-2 font-serif text-ink-900 outline-none transition-colors focus:border-ink-800"
+            />
+          </label>
+          <label class="block">
+            <span class="label-eyebrow">Email</span>
+            <input
+              type="email"
+              name="email"
+              required
+              class="mt-2 w-full border-b border-ink-300 bg-transparent py-2 font-serif text-ink-900 outline-none transition-colors focus:border-ink-800"
+            />
+          </label>
+        </div>
+
+        <label class="block">
+          <span class="label-eyebrow">Affiliation <span class="text-ink-300 normal-case tracking-normal">(optional)</span></span>
+          <input
+            type="text"
+            name="affiliation"
+            class="mt-2 w-full border-b border-ink-300 bg-transparent py-2 font-serif text-ink-900 outline-none transition-colors focus:border-ink-800"
+          />
+        </label>
+
+        <label class="block">
+          <span class="label-eyebrow">Message</span>
+          <textarea
+            name="message"
+            rows="5"
+            required
+            class="mt-2 w-full border border-ink-300 bg-paper p-3 font-serif text-ink-900 outline-none transition-colors focus:border-ink-800"
+          ></textarea>
+        </label>
+
+        <button type="submit" class="btn-primary">
+          Send message
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

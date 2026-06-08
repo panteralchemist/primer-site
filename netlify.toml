@@ -1,0 +1,25 @@
+# Netlify build configuration for primer-site (Astro static)
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # Astro and Tailwind work fine on Node 20 LTS; keep this pinned so deploys
+  # are reproducible. Bump deliberately if you upgrade locally.
+
+# Long cache for hashed assets (Astro emits content-hashed filenames).
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Conservative cache for the rest of the site so updates land fast.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

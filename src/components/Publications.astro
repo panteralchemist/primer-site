@@ -1,0 +1,183 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { publications, patents, recognition } from '../data/cv';
+
+// Eagerly import all the thumbnails so Astro processes them through the
+// image pipeline. The glob shape gives us {<path>: ImageMetadata}.
+const thumbModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/pubs/*.{png,svg}',
+  { eager: true }
+);
+
+// Map slug → image. Prefer the .png if both .png and .svg exist (real PDF render
+// wins over the generated SVG fallback).
+const thumbs: Record<string, ImageMetadata> = {};
+for (const [path, mod] of Object.entries(thumbModules)) {
+  const filename = path.split('/').pop() ?? '';
+  const slug = filename.replace(/\.(png|svg)$/, '');
+  const isPng = filename.endsWith('.png');
+  if (!thumbs[slug] || isPng) {
+    thumbs[slug] = mod.default;
+  }
+}
+
+const doiUrl = (doi: string) => `https://doi.org/${doi}`;
+
+// Highlight the three biggest pubs at the top of the list.
+const highlightSlugs = new Set(['wang-2024-nature', 'tellis-2014-science', 'primer-2017-jacs']);
+---
+
+<section id="publications" class="border-b border-ink-200">
+  <div class="container-readable py-20 md:py-24">
+    <div class="grid md:grid-cols-12 gap-12 mb-16">
+      <div class="md:col-span-4">
+        <p class="label-eyebrow mb-4">Selected publications</p>
+        <h2 class="text-3xl md:text-4xl font-semibold rule-heading">Peer-reviewed work.</h2>
+      </div>
+      <div class="md:col-span-8">
+        <p class="text-lg text-ink-700 leading-relaxed">
+          Fourteen peer-reviewed publications and two issued patents, with co-authorship in
+          <em>Nature</em>, <em>Science</em>, <em>JACS</em>, <em>Nature Protocols</em>, and
+          <em>OPRD</em>. Click any cover to read the article.
+        </p>
+        <p class="mt-3 text-sm text-ink-500">
+          Citation counts and the full bibliography are tracked on
+          <a
+            href="https://scholar.google.com/citations?user=HN9GVOoAAAAJ"
+            target="_blank"
+            rel="noopener"
+            class="link-underline"
+          >Google Scholar</a>.
+        </p>
+      </div>
+    </div>
+
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      {publications.map((p) => {
+        const thumb = thumbs[p.slug];
+        const isHighlight = highlightSlugs.has(p.slug);
+        return (
+          <li class="group">
+            <a
+              href={doiUrl(p.doi)}
+              target="_blank"
+              rel="noopener"
+              class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-800 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            >
+              <div class="relative overflow-hidden bg-ink-50 aspect-[850/1100] shadow-sm transition-shadow group-hover:shadow-lg">
+                {thumb && (
+                  <Image
+                    src={thumb}
+                    alt={`Cover thumbnail for ${p.title}`}
+                    widths={[280, 420, 560]}
+                    sizes="(min-width: 1024px) 280px, (min-width: 640px) 320px, 90vw"
+                    class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                )}
+                {isHighlight && (
+                  <span class="absolute top-3 left-3 bg-ink-800 px-2.5 py-1 font-sans text-[0.65rem] font-medium uppercase tracking-[0.18em] text-paper">
+                    Highlight
+                  </span>
+                )}
+              </div>
+
+              <div class="mt-4">
+                <p class="font-sans text-xs uppercase tracking-[0.14em] text-ink-700">
+                  {p.journal} · {p.year}
+                </p>
+                <h3 class="mt-2 font-serif text-base md:text-lg font-semibold leading-snug text-ink-900 group-hover:text-ink-800">
+                  {p.title}
+                </h3>
+                <p class="mt-2 font-serif text-sm italic text-ink-700 leading-relaxed line-clamp-2">
+                  {p.authors}
+                </p>
+                <p class="mt-1 font-sans text-xs text-ink-500">
+                  {p.where}{p.note && <span> · {p.note}</span>}
+                </p>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+
+    <!-- Patents -->
+    <div class="mt-24">
+      <h3 class="text-2xl md:text-3xl font-semibold rule-heading mb-10">Patents</h3>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        {patents.map((p) => {
+          const thumb = thumbs[p.slug];
+          return (
+            <li class="group">
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener"
+                class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-800 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              >
+                <div class="relative overflow-hidden bg-ink-50 aspect-[850/1100] shadow-sm transition-shadow group-hover:shadow-lg">
+                  {thumb && (
+                    <Image
+                      src={thumb}
+                      alt={`Cover thumbnail for ${p.title}`}
+                      widths={[280, 420, 560]}
+                      sizes="(min-width: 1024px) 280px, (min-width: 640px) 320px, 90vw"
+                      class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  )}
+                </div>
+                <div class="mt-4">
+                  <p class="font-sans text-xs uppercase tracking-[0.14em] text-ink-700">
+                    {p.office} · {p.year}
+                  </p>
+                  <h4 class="mt-2 font-serif text-base md:text-lg font-semibold leading-snug text-ink-900 group-hover:text-ink-800">
+                    {p.title}
+                  </h4>
+                  <p class="mt-2 font-serif text-sm italic text-ink-700 leading-relaxed line-clamp-2">
+                    {p.authors}
+                  </p>
+                  <p class="mt-1 font-sans text-xs text-ink-500">{p.number}</p>
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <p class="mt-8 font-sans text-xs text-ink-500">
+        A third patent application is pending and will be added once published.
+      </p>
+    </div>
+
+    <!-- Recognition -->
+    <div class="mt-24">
+      <h3 class="text-2xl md:text-3xl font-semibold rule-heading mb-10">Recognition</h3>
+      <ul class="divide-y divide-ink-200 border-y border-ink-200">
+        {recognition.map((r) => {
+          const href = 'href' in r ? r.href : undefined;
+          return (
+            <li class="grid md:grid-cols-12 gap-4 py-4">
+              <span class="md:col-span-9 text-ink-900">
+                {href ? (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-underline"
+                  >
+                    {r.what}
+                  </a>
+                ) : (
+                  r.what
+                )}
+              </span>
+              <span class="md:col-span-3 font-sans text-sm uppercase tracking-wider text-ink-700 md:text-right">
+                {r.when}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </div>
+</section>
