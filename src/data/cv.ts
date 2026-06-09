@@ -72,7 +72,7 @@ export const experience = [
     bullets: [
       'Developed a crystallization-induced resolution of a racemic amine — providing the first commercial-scale access to the single-enantiomer of a glutarimide-containing scaffold.',
       'Scaled three processes from 500 g to >20 kg, supporting on-site manufacturing in Switzerland, the United Kingdom, and the United States.',
-      'Filed a patent application and published a peer-reviewed paper on the novel processes developed for CC-90010.',
+      'Filed a patent application and published a peer-reviewed paper on the novel processes developed for <a href="https://www.bmsclinicaltrials.com/us/en/clinical-trials/NCT03220347" target="_blank" rel="noopener" class="link-underline">CC-90010</a>.',
     ],
   },
 ] as const;
