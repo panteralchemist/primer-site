@@ -10,7 +10,7 @@ import { about, stats, education } from '../data/cv';
         <h2 class="text-3xl md:text-4xl font-semibold rule-heading">Process chemistry, end&nbsp;to&nbsp;end.</h2>
       </div>
       <div class="md:col-span-8 space-y-5 text-lg leading-relaxed">
-        {about.map((p) => <p>{p}</p>)}
+        {about.map((p) => <p set:html={p} />)}
       </div>
     </div>
 
