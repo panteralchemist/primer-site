@@ -32,7 +32,7 @@ export const links = [
 
 export const about = [
   'I lead CMC process chemistry teams that develop, optimize, and scale the synthetic routes behind oncology drug candidates — moving programs from gram-scale discovery deliveries through hundred-kilogram GMP manufacture.',
-  'My work sits at the intersection of synthetic invention, crystallization and form control, vendor and tech-transfer management, and the practical realities of clinical-supply timelines. Earlier in my career I co-developed the photoredox / nickel dual-catalysis cross-coupling strategy that opened up Csp<sup>2</sup>–Csp<sup>3</sup> bond formation as a routine pharmaceutical disconnection.',
+  'My work sits at the intersection of synthetic invention, crystallization and form control, vendor and tech-transfer management, and the practical realities of clinical-supply timelines. Earlier in my career I co-developed the photoredox / nickel dual-catalysis cross-coupling strategy that opened up C(sp<sup>2</sup>)–C(sp<sup>3</sup>) bond formation as a routine pharmaceutical disconnection.',
 ];
 
 export const experience = [
