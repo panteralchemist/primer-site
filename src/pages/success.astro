@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Message sent — David Primer">
+  <Header />
+  <main class="container-readable py-32 md:py-40 text-center">
+    <p class="label-eyebrow mb-4">Message received</p>
+    <h1 class="text-3xl md:text-4xl font-semibold rule-heading mb-6">Thanks for reaching out.</h1>
+    <p class="text-ink-700 leading-relaxed max-w-md mx-auto">
+      I'll get back to you personally — usually within a day or two.
+    </p>
+    <a href="/" class="btn-primary mt-10 inline-flex">← Back to site</a>
+  </main>
+  <Footer />
+</Base>
