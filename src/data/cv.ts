@@ -60,7 +60,7 @@ export const experience = [
       'Managed and trained two scientists on process development and route scouting toward a key intermediate in the bifunctional degrader portfolio.',
       'Identified multiple crystalline forms of a high-MW (>900) greasy API, enabling the program to transition from amorphous precipitation to a controlled crystallization.',
       'Provided technical leadership for tech transfers to partner sites in Colorado, Wisconsin, India, and China.',
-      'Co-designed browser-based high-throughput-experimentation software with ACD Labs and internal IT, improving data capture across the solubility, catalysis, and class-variable screening groups.',
+      'Co-designed <a href="https://www.acdlabs.com/products/spectrus-platform/katalyst-d2d/" target="_blank" rel="noopener" class="link-underline">browser-based high-throughput-experimentation software</a> with ACD Labs and internal IT, improving data capture across the solubility, catalysis, and class-variable screening groups.',
     ],
   },
   {
