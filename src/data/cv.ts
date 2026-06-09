@@ -56,7 +56,7 @@ export const experience = [
     period: '2020 – 2022',
     location: 'New Brunswick, NJ',
     bullets: [
-      'Optimized the final three steps of the CC-94676 (BMS-986365) synthesis — delivering >12 kg of Phase 1 material as racemate and as both single diastereomers in high chemical and enantiomeric purity.',
+      'Optimized the final three steps of the CC-94676 (<a href="https://www.bmsclinicaltrials.com/us/en/recharge-hcp/how-bms-986365-works" target="_blank" rel="noopener" class="link-underline">BMS-986365</a>) synthesis — delivering >12 kg of Phase 1 material as racemate and as both single diastereomers in high chemical and enantiomeric purity.',
       'Managed and trained two scientists on process development and route scouting toward a key intermediate in the bifunctional degrader portfolio.',
       'Identified multiple crystalline forms of a high-MW (>900) greasy API, enabling the program to transition from amorphous precipitation to a controlled crystallization.',
       'Provided technical leadership for tech transfers to partner sites in Colorado, Wisconsin, India, and China.',

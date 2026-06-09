@@ -34,7 +34,7 @@ import { experience } from '../data/cv';
                     class="absolute left-0 top-[0.7em] block h-1.5 w-1.5 rounded-full bg-ink-800"
                     aria-hidden="true"
                   ></span>
-                  {b}
+                  <span set:html={b} />
                 </li>
               ))}
             </ul>
