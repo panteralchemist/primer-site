@@ -45,7 +45,7 @@ export const experience = [
     bullets: [
       'Lead and develop the CMC process chemistry team — coordinating project assignments, technical training, and career development.',
       'CMC project lead for LSN4170130, coordinating across three external vendors, discovery partners, and the broader CMC development team.',
-      'Developed the 4-step GMP route for LY4050784, internally delivering 500 g for GLP tox on an accelerated timeline; the process has since scaled to >100 kg at multiple GMP vendors.',
+      'Developed the 4-step GMP route for <a href="https://trials.lilly.com/en-US/trial/528616" target="_blank" rel="noopener" class="link-underline">LY4050784</a>, internally delivering 500 g for GLP tox on an accelerated timeline; the process has since scaled to >100 kg at multiple GMP vendors.',
       'Developed the 5-step GMP route for <a href="https://www.lillyoncologypipeline.com/molecule/fgfr3-inhibitor/clinical-trial/NCT07218380" target="_blank" rel="noopener" class="link-underline">LY3866288</a> and led tech transfer activities that cut timelines by 70% and costs by 50% — keeping Phase 1 plans on pace for accelerated approval; scaled to >400 kg externally.',
     ],
   },
