@@ -6,18 +6,17 @@ import { publications, patents, recognition } from '../data/cv';
 // Eagerly import all the thumbnails so Astro processes them through the
 // image pipeline. The glob shape gives us {<path>: ImageMetadata}.
 const thumbModules = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/pubs/*.{png,svg}',
+  '../assets/pubs/*.{png,jpg,jpeg,svg}',
   { eager: true }
 );
 
-// Map slug → image. Prefer the .png if both .png and .svg exist (real PDF render
-// wins over the generated SVG fallback).
+// Map slug → image. Prefer raster (png/jpg/jpeg) over svg.
 const thumbs: Record<string, ImageMetadata> = {};
 for (const [path, mod] of Object.entries(thumbModules)) {
   const filename = path.split('/').pop() ?? '';
-  const slug = filename.replace(/\.(png|svg)$/, '');
-  const isPng = filename.endsWith('.png');
-  if (!thumbs[slug] || isPng) {
+  const slug = filename.replace(/\.(png|jpg|jpeg|svg)$/, '');
+  const isRaster = /\.(png|jpg|jpeg)$/.test(filename);
+  if (!thumbs[slug] || isRaster) {
     thumbs[slug] = mod.default;
   }
 }
@@ -54,7 +53,11 @@ const highlightSlugs = new Set(['wang-2024-nature', 'tellis-2014-science', 'prim
     </div>
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-      {publications.map((p) => {
+      {[...publications].sort((a, b) => {
+        const aH = highlightSlugs.has(a.slug) ? 0 : 1;
+        const bH = highlightSlugs.has(b.slug) ? 0 : 1;
+        return aH - bH;
+      }).map((p) => {
         const thumb = thumbs[p.slug];
         const isHighlight = highlightSlugs.has(p.slug);
         return (
@@ -105,7 +108,7 @@ const highlightSlugs = new Set(['wang-2024-nature', 'tellis-2014-science', 'prim
     <!-- Patents -->
     <div class="mt-24">
       <h3 class="text-2xl md:text-3xl font-semibold rule-heading mb-10">Patents</h3>
-      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
         {patents.map((p) => {
           const thumb = thumbs[p.slug];
           return (
@@ -116,14 +119,14 @@ const highlightSlugs = new Set(['wang-2024-nature', 'tellis-2014-science', 'prim
                 rel="noopener"
                 class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-800 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
               >
-                <div class="relative overflow-hidden bg-ink-50 aspect-[850/1100] shadow-sm transition-shadow group-hover:shadow-lg">
+                <div class="relative overflow-hidden bg-ink-50 aspect-[2/1] shadow-sm transition-shadow group-hover:shadow-lg">
                   {thumb && (
                     <Image
                       src={thumb}
                       alt={`Cover thumbnail for ${p.title}`}
-                      widths={[280, 420, 560]}
-                      sizes="(min-width: 1024px) 280px, (min-width: 640px) 320px, 90vw"
-                      class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                      widths={[640, 960, 1280]}
+                      sizes="(min-width: 640px) 50vw, 90vw"
+                      class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   )}
                 </div>
